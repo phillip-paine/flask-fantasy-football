@@ -2,7 +2,8 @@
 import pandas as pd
 
 
-def create_team_index_dataframe() -> pd.DataFrame:
+def create_team_index_table() -> pd.DataFrame:
+
     return pd.DataFrame()
 
 
