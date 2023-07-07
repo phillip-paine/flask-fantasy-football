@@ -7,8 +7,8 @@ from model import Model
 
 
 class TeamStrength(Model):
-    def __init__(self):
-        pass
+    def __init__(self, bugs_model: str):
+        self.bugs = bugs_model
 
     def fit(self):
         pass
