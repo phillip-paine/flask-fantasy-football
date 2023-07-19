@@ -4,42 +4,6 @@ from dataclasses import dataclass
 from typing import Dict
 
 
-@dataclass
-class TeamStrengthDataModel:
-    fixtures: pd.DataFrame
-    teamsIndex: TeamData  # FIXME: might need to replace with TeamData class object
-    season: str
-
-    @property
-    def fetch_season(self):
-        return self.season
-    @property
-    def game_week(self):
-        return self.fixtures['event'].max()
-
-    @property
-    def home_goals_series(self):
-        return self.fixtures.team_h_score
-
-    @property
-    def away_goals_series(self):
-        return self.fixtures.team_a_score
-
-    @property
-    def home_team_index_series(self):
-        return self.fixtures['team_h']
-
-    @property
-    def away_team_index_series(self):
-        return self.fixtures['team_a']
-
-    def add_fixture_coefficients(self):
-        return self.fixtures
-
-    def add_fixture_dataframe(self, ):
-        return
-
-
 class TeamData:
     def __init__(self, teams_data: Dict[str, pd.DataFrame]):
         self.team_data_dict = teams_data
@@ -72,6 +36,43 @@ class TeamData:
         # This needs to be done before passing to here
         # df_coef = pd.DataFrame({'team_index': ti, 'att_coef': att_coef, 'def_coef': def_coef})
         return self.df.merge(df_team_coefs, on=['team_index'])
+
+
+@dataclass
+class TeamStrengthDataModel:
+    fixtures: pd.DataFrame
+    teamsIndex: TeamData  # FIXME: might need to replace with TeamData class object
+    season: str
+
+    @property
+    def fetch_season(self):
+        return self.season
+
+    @property
+    def game_week(self):
+        return self.fixtures['event'].max()
+
+    @property
+    def home_goals_series(self):
+        return self.fixtures.team_h_score
+
+    @property
+    def away_goals_series(self):
+        return self.fixtures.team_a_score
+
+    @property
+    def home_team_index_series(self):
+        return self.fixtures['team_h']
+
+    @property
+    def away_team_index_series(self):
+        return self.fixtures['team_a']
+
+    def add_fixture_coefficients(self):
+        return self.fixtures
+
+    def add_fixture_dataframe(self, ):
+        return
 
 
 if __name__ == '__main__':
