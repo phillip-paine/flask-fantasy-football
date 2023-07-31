@@ -53,6 +53,10 @@ class TeamStrengthDataModel:
         return self.fixtures['event'].max()
 
     @property
+    def completed_games(self):
+        return len(self.fixtures.index)
+
+    @property
     def home_goals_series(self):
         return self.fixtures.team_h_score
 
