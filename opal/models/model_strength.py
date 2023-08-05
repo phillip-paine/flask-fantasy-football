@@ -43,13 +43,16 @@ class JagsModelComponents:
 
     @property
     def get_home_advantage(self) -> float:
-        return self.jags_samples
+        home_adv_samples = self.jags_samples['home_p']
+        return np.mean(home_adv_samples)[0]
 
     @property
-    def get_team_strength(self) -> pd.DataFrame:
+    def get_team_strength(self) -> pd.Series:
         # return the att and def coef for each team
-        df_team_str = self.jags_samples
-        return df_team_str
+        columns = []
+        team_coef_samples = pd.DataFrame(self.jags_samples[columns])
+        # need the team index for merging to data
+        return team_coef_samples.mean()
 
 
 
